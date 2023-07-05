@@ -7,8 +7,5 @@
     "test": "npm start"
   },
   "author": "Alex Li",
-  "license": "ISC",
-  "dependencies": {
-    "faker": "latest"
-  }
+  "license": "ISC"
 }
