@@ -1,8 +1,8 @@
 {
-  "name": "backend",
+  "name": "mongo-db-handler",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "test": "npm start"
   },
