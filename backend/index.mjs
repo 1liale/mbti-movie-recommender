@@ -1,4 +1,4 @@
-const faker = require("faker");
+const faker = faker('faker')
 
 exports.handler = async (event) => {
   // TODO implement
