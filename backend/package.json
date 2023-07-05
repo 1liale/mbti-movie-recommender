@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "author": "Alex Li",
+  "license": "ISC",
+  "dependencies": {
+    "faker": "latest"
+  }
+}
