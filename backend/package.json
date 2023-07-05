@@ -6,6 +6,9 @@
   "scripts": {
     "test": "npm start"
   },
+  "dependencies": {
+    "faker" : "latest"
+  },
   "author": "Alex Li",
   "license": "ISC"
 }
