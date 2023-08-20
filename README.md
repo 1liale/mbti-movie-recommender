@@ -10,7 +10,7 @@ Phase 1: Achieve a MVP
 - Stage 3: Set up backend database to correctly feed data for the frontend to use and ensure endpoints are integrated.
 - Stage 4: Get ML model to work locally and deploy to sagemaker for training and hosting. Integrate with lambda services.
 
-Phase 2: Product improvement (Repeat Phase until objectives achieved)
+Phase 2: Product improvement (Repeat this phase until objectives are achieved)
 - Stage 1: Testing, Documentation, and Code Refactoring.
 - Stage 2: Improve UI/UX on frontend, setup AWS Cognito for authentication. 
 - Stage 3: Improve core recommender system to be more accurate and useful.
