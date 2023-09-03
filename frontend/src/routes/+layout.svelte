@@ -7,7 +7,10 @@
 
 <div class="app">
 	<NavBar />
-	<InfoAlert color="blue" customClass="dark:bg-white-500"> Hold on, project is currently under development! Rome wasn't built in a day 😛 Please visit another time!</InfoAlert>
+	<InfoAlert color="blue" customClass="dark:bg-white-500">
+		Hold on, project is currently under development! Rome wasn't built in a day 😛 Please visit
+		another time!</InfoAlert
+	>
 	<slot />
 </div>
 

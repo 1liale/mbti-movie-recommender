@@ -14,7 +14,7 @@
 		Span
 	} from 'flowbite-svelte';
 	import { SearchOutline } from 'flowbite-svelte-icons';
-	$: activeUrl = $page.url.pathname
+	$: activeUrl = $page.url.pathname;
 </script>
 
 <Navbar color="form" let:hidden let:toggle>
@@ -44,7 +44,7 @@
 			</div>
 			<Input id="search-navbar" class="pl-10" placeholder="Search..." />
 		</div>
-		<DarkMode class="ml-3 border-gray-300 dark:border-gray-500 border"/>
+		<DarkMode class="ml-3 border-gray-300 dark:border-gray-500 border" />
 		<NavHamburger on:click={toggle} />
 	</div>
 	<NavUl active {hidden} {activeUrl}>
