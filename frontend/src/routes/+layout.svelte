@@ -1,10 +1,10 @@
 <script>
 	import NavBar from '$components/NavBar/NavBar.component.svelte';
-import '../app.postcss';
+	import '../app.postcss';
 </script>
 
 <div class="app">
-	<NavBar />
+	<slot /> 
 </div>
 
 <style>

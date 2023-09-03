@@ -10,6 +10,9 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write ."
 	},
+	"husky": {
+		"pre-commit": "echo \"[Husky] pre-commit\""
+	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
 		"@neoconfetti/svelte": "^1.0.0",
@@ -24,6 +27,7 @@
 		"eslint-plugin-svelte": "^2.30.0",
 		"flowbite-svelte": "^0.44.4",
 		"flowbite-svelte-icons": "^0.4.2",
+		"husky": "^8.0.3",
 		"postcss": "^8.4.24",
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.8.0",
