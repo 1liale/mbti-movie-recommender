@@ -1,12 +1,10 @@
 <script>
-	import '../app.postcss';
-	import './styles.css';
+	import NavBar from '$components/NavBar/NavBar.component.svelte';
+import '../app.postcss';
 </script>
 
 <div class="app">
-	<main>
-		<slot />
-	</main>
+	<NavBar />
 </div>
 
 <style>
@@ -14,16 +12,10 @@
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
+		
+		background: linear-gradient(to bottom, #9bfaff, #1E90FF);
+		/* Replace #87CEEB and #1E90FF with your preferred light blue colors */
+		background-repeat: no-repeat;
+		background-attachment: fixed;
 	}
 </style>

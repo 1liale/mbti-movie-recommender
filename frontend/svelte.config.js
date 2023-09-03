@@ -9,8 +9,16 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			fallback: 'index.html'
-		})
+			fallback: 'index.html',
+			precompress: false,
+		}),
+		prerender: { entries: [] },
+		alias: {
+			$components: './src/components',
+			$stores: './src/stores',
+			$assets: './src/assets',
+			$views: './src/views',
+		}
 	}
 };
 

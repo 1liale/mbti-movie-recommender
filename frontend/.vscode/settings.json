@@ -1,0 +1,13 @@
+{
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true,
+    },
+    "emmet.useInlineCompletions": true,
+    "tailwindCSS.experimental.configFile": null,
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.includeLanguages": {
+        "Svelte": "html"
+    }
+}
