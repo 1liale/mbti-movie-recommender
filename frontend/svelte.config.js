@@ -10,13 +10,13 @@ const config = {
 	kit: {
 		adapter: adapter({
 			fallback: 'index.html',
-			precompress: false,
+			precompress: false
 		}),
 		alias: {
 			$components: './src/components',
 			$stores: './src/stores',
 			$assets: './src/assets',
-			$views: './src/views',
+			$views: './src/views'
 		}
 	}
 };
