@@ -5,13 +5,20 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: vitePreprocess(),
+	preprocess: [vitePreprocess({})],
 
 	kit: {
 		adapter: adapter({
-		  fallback: 'index.html'
-		})
-	  }
+			fallback: 'index.html',
+			precompress: false
+		}),
+		alias: {
+			$components: './src/components',
+			$stores: './src/stores',
+			$assets: './src/assets',
+			$views: './src/views'
+		}
+	}
 };
 
 export default config;

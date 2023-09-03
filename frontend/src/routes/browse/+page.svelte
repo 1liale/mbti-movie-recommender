@@ -1,0 +1,1 @@
+<svelte:head><title>MBTI Movies - Browse</title></svelte:head>
