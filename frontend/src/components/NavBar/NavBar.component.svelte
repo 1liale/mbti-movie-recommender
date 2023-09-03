@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Logo from '$assets/logo.png';
+	import { page } from '$app/stores';
 	import {
 		Button,
+		DarkMode,
 		Heading,
 		Input,
 		NavBrand,
@@ -12,6 +14,7 @@
 		Span
 	} from 'flowbite-svelte';
 	import { SearchOutline } from 'flowbite-svelte-icons';
+	$: activeUrl = $page.url.pathname
 </script>
 
 <Navbar color="form" let:hidden let:toggle>
@@ -25,7 +28,7 @@
 			<Span gradient>MBTI Movies</Span>
 		</Heading>
 	</NavBrand>
-	<div class="flex md:order-2">
+	<div class="flex order-2">
 		<Button
 			color="none"
 			data-collapse-toggle="mobile-menu-3"
@@ -41,9 +44,11 @@
 			</div>
 			<Input id="search-navbar" class="pl-10" placeholder="Search..." />
 		</div>
+		<DarkMode class="ml-3 border-gray-300 dark:border-gray-500 border"/>
 		<NavHamburger on:click={toggle} />
 	</div>
-	<NavUl {hidden}>
+	<NavUl active {hidden} {activeUrl}>
 		<NavLi href="/">Home</NavLi>
+		<NavLi href="/browse">Browse</NavLi>
 	</NavUl>
 </Navbar>

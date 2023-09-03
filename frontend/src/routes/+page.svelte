@@ -1,5 +1,2 @@
-<script>
-	import NavBar from '$components/NavBar/NavBar.component.svelte';
-</script>
+<svelte:head><title>MBTI Movies - Home</title></svelte:head>
 
-<NavBar />
