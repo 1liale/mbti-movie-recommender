@@ -1,5 +1,3 @@
-import type { ComponentProps } from "$components/Component.types";
+import type { ComponentProps } from '$components/Component.types';
 
-export interface NavBarComponentProps extends ComponentProps {
-
-}
+export interface NavBarComponentProps extends ComponentProps {}

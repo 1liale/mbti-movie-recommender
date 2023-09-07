@@ -4,16 +4,18 @@
 
 	import '../app.css';
 
-	const isDevEnv = import.meta.env.DEV
+	const isDevEnv = import.meta.env.DEV;
 </script>
 
-<div class="app relative flex flex-col bg-gradient-to-b from-c-cyan to-c-blue dark:from-c-blue dark:to-blue-400 h-screen">
+<div
+	class="app relative flex flex-col bg-gradient-to-b from-c-cyan to-c-blue dark:from-c-blue dark:to-blue-400 h-screen"
+>
 	<NavBar />
 	<InfoAlert isHidden={!isDevEnv} color="blue" customClass="dark:bg-white-500">
 		Hold on, project is currently under development! Rome wasn't built in a day 😛 Please visit
 		another time!
 	</InfoAlert>
-	<content class="flex-auto overflow-auto p-3"> 
+	<content class="flex-auto overflow-auto p-3">
 		<slot />
 	</content>
 </div>

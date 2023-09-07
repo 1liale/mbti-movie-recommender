@@ -13,7 +13,7 @@ const config = {
 			precompress: false
 		}),
 		prerender: {
-			entries: [],
+			entries: []
 		},
 		alias: {
 			$components: './src/components',
