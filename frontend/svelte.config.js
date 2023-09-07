@@ -12,6 +12,9 @@ const config = {
 			fallback: 'index.html',
 			precompress: false
 		}),
+		prerender: {
+			entries: [],
+		},
 		alias: {
 			$components: './src/components',
 			$stores: './src/stores',

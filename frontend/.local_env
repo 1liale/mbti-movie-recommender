@@ -1,0 +1,2 @@
+APPSYNC_API_URL=''
+BUILD_ENV='dev' # can be one of dev, staging, prod

@@ -1,27 +1,19 @@
 <script>
-	import InfoAlert from '$components/Alerts/InfoAlert.component.svelte';
-	import NavBar from '$components/NavBar/NavBar.component.svelte';
+	import InfoAlert from '$components/general/Alerts/InfoAlert.component.svelte';
+	import NavBar from '$components/custom/NavBar/NavBar.component.svelte';
 
-	import '../app.postcss';
+	import '../app.css';
+
+	const isDevEnv = import.meta.env.DEV
 </script>
 
-<div class="app">
+<div class="app relative flex flex-col bg-gradient-to-b from-c-cyan to-c-blue dark:from-c-blue dark:to-blue-400 h-screen">
 	<NavBar />
-	<InfoAlert color="blue" customClass="dark:bg-white-500">
+	<InfoAlert isHidden={!isDevEnv} color="blue" customClass="dark:bg-white-500">
 		Hold on, project is currently under development! Rome wasn't built in a day 😛 Please visit
-		another time!</InfoAlert
-	>
-	<slot />
+		another time!
+	</InfoAlert>
+	<content class="flex-auto overflow-auto p-3"> 
+		<slot />
+	</content>
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-
-		background: linear-gradient(to bottom, #9bfaff, #1e90ff);
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-	}
-</style>

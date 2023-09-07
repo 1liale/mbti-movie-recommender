@@ -27,7 +27,9 @@ const config = {
 					700: '#EB4F27',
 					800: '#CC4522',
 					900: '#A5371B'
-				}
+				},
+				'c-cyan': '#9bfaff',
+				'c-blue': '#1e90ff'
 			}
 		}
 	}

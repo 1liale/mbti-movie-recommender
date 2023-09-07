@@ -1,4 +1,4 @@
-import type { ComponentProps } from '$components/Types/Component.types';
+import type { ComponentProps } from '$components/Component.types';
 
 export type AlertColors =
 	| 'form'

@@ -14,10 +14,19 @@
 		Span
 	} from 'flowbite-svelte';
 	import { SearchOutline } from 'flowbite-svelte-icons';
+	import type { NavBarComponentProps } from './NavBar.types';
+
+	interface $$Props extends NavBarComponentProps {}
+
+	export let isHidden: boolean = false;
+	export let customClass: string | undefined = '';
+	export let customStyle: string | undefined = '';
+
 	$: activeUrl = $page.url.pathname;
 </script>
 
-<Navbar color="form" let:hidden let:toggle>
+{#if !isHidden}
+<Navbar color="form" style={customStyle} class={customClass} let:hidden let:toggle>
 	<NavBrand href="/">
 		<img src={Logo} alt="Logo" class="mr-3 h-6 sm:h-9" />
 		<Heading
@@ -52,3 +61,4 @@
 		<NavLi href="/browse">Browse</NavLi>
 	</NavUl>
 </Navbar>
+{/if}
