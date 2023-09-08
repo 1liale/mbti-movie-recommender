@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Card } from 'flowbite-svelte';
 	import type { MovieCardComponentProps } from './MovieCard.types';
-	import { setModal, toggleModal } from '$stores/modal.store';
+	import { toggleModal } from '$stores/modal.store';
 
 	interface $$Props extends MovieCardComponentProps {}
 
@@ -11,7 +11,7 @@
 
 	const handleOnCardClick = () => {
 		toggleModal();
-	}
+	};
 </script>
 
 {#if !isHidden}

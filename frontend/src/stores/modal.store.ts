@@ -9,15 +9,15 @@ const defaultModalState = {
 };
 
 export const setModal = (modalState: ModalState) => {
-    ModalUIState.set(modalState);
+	ModalUIState.set(modalState);
 };
 
 export const toggleModal = () => {
-    ModalUIState.update((state) => { 
-        state.isOpened = !state.isOpened
-        console.log("toggled", state);
-        return state
-    })
+	ModalUIState.update((state) => {
+		state.isOpened = !state.isOpened;
+		console.log('toggled', state);
+		return state;
+	});
 };
 
 export const ModalUIState = writable(Object.assign({}, defaultModalState));

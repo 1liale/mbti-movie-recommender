@@ -13,8 +13,8 @@
 >
 	<NavBar />
 	<InfoAlert isHidden={isDevEnv} color="blue" customClass="dark:bg-white-500">
-		Hold on, project is currently under development! Some features may not be available 🥲. Please visit
-		another time!
+		Hold on, project is currently under development! Some features may not be available 🥲. Please
+		visit another time!
 	</InfoAlert>
 	<content class="flex-auto overflow-auto p-3">
 		<slot />
