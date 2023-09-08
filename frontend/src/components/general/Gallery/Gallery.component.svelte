@@ -38,9 +38,9 @@
 		{#each items as item, i (item)}
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<div
-				id={'gallery-item' + i}
+				id={'gallery-item-' + i}
 				animate:flip={{ duration: dragDuration }}
-				class="item"
+				class="cursor-pointer"
 				draggable="true"
 				on:dragstart={() => (draggingItem = item)}
 				on:dragend={() => (draggingItem = undefined)}
