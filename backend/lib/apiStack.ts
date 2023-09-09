@@ -1,5 +1,5 @@
 import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib'
-import { AppsyncFunction, AuthorizationType, Code, FunctionRuntime, GraphqlApi, SchemaFile } from 'aws-cdk-lib/aws-appsync';
+import { AppsyncFunction, AuthorizationType, Code, FunctionRuntime, GraphqlApi, Resolver, SchemaFile } from 'aws-cdk-lib/aws-appsync';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { join } from 'path';
@@ -45,6 +45,12 @@ export class AppsyncMongoAPIStack extends Stack {
 			})
 		);
 
+		// MongoDB API Datasource
+		const mongoDBAtlasDatasrc = api.addHttpDataSource(
+			'mongoDBAtlasCluster',
+			'https://data.mongodb-api.com'
+		);
+
 		// Function to get the secret
 		const getMongoSecretFunc = new AppsyncFunction(
 			this,
@@ -60,11 +66,68 @@ export class AppsyncMongoAPIStack extends Stack {
 			}
 		)
 
-		// MongoDB API Datasource
-		const mongoDBApiDatasrc = api.addHttpDataSource(
-			'mongoDBAtlasCluster',
-			'https://data.mongodb-api.com'
+		// Function to list all movies from MongoDB
+		const listAllMoviesFunction = new AppsyncFunction(
+			this,
+			'listAllMoviesFunction',
+			{
+				api,
+				dataSource: mongoDBAtlasDatasrc,
+				name: 'listAllMoviesFunction',
+				code: Code.fromAsset(
+					join(__dirname, '/graphql/mappings/resolvers/listAllMovies.js')
+				),
+				runtime: FunctionRuntime.JS_1_0_0
+			}
 		);
+
+		// Function to insert a movie into MongoDB
+		const insertMovieFunction = new AppsyncFunction(
+			this,
+			'insertMovieFunction',
+			{
+				api,
+				dataSource: mongoDBAtlasDatasrc,
+				name: 'insertMovie',
+				code: Code.fromAsset(
+					join(__dirname, '/graphql/mappings/resolvers/insertMovie.js')
+				),
+				runtime: FunctionRuntime.JS_1_0_0
+			}
+		);
+
+		// Pipeline for listAllMovies function (gets mongodb secrets first)
+		const listAllMoviesPipelineResolver = new Resolver(
+			this,
+			'listAllMoviesPipelineResolver',
+			{
+				api,
+				typeName: 'Query',
+				fieldName: 'listAllMovies',
+				runtime: FunctionRuntime.JS_1_0_0,
+				code: Code.fromAsset(
+					join(__dirname, '/graphql/mappings/pipeline.js')
+				),
+				pipelineConfig: [getMongoSecretFunc, listAllMoviesFunction],
+			}
+		)
+
+		// Pipeline for insertMovie function (gets mongodb secrets first)
+		const insertMoviePipelineResolver = new Resolver(
+			this,
+			'insertMoviePipelineResolver',
+			{
+				api,
+				typeName: 'Mutation',
+				fieldName: 'insertMovie',
+				runtime: FunctionRuntime.JS_1_0_0,
+				code: Code.fromAsset(
+					join(__dirname, '/graphql/mappings/pipeline.js')
+				),
+				pipelineConfig: [getMongoSecretFunc, insertMovieFunction],
+			}
+		)
+
 
 		new CfnOutput(this, 'appsync api key', {
 			value: api.apiKey!,
