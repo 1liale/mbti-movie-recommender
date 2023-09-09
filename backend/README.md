@@ -12,3 +12,25 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk deploy`      deploy this stack to your default AWS account/region
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template
+
+## Data Modelling
+Movie Model (i.e displayed in Modal or MovieCard components when queried)
+
+```
+Movie
+- id
+- name
+- category
+- mbti_code
+- s3_img_path
+- s3_trailer_path
+```
+
+> No User model configured yet, might introduce later to make use of Collaborative Filtering techniques (here's an idea)
+```
+User
+- id
+- name
+- first_name
+- last_name
+```

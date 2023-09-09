@@ -1,25 +1,36 @@
 schema {
-    query:Query
+    query: Query
     mutation: Mutation
 }
 
 type Query {
-    getTodo(id: ID!): Todo
+    getMovie(id: ID!): Movie
 }
 
 type Mutation {
-    addTodo(id: ID!, name: String, description: String, priority: Int, status: TodoStatus): Todo
+    addMovie(id: ID!, name: String, description: String, priority: Int, status: TodoStatus): Todo
 }
 
-type Todo {
+type Movie {
     id: ID!
     name: String
+    genre: MovieGenre
     description: String
-    priority: Int
-    status: TodoStatus
+    mbti_code: String
+    s3_img_path: String
+    s3_trailer_path: String
 }
 
-enum TodoStatus {
-    done
-    pending
+enum MovieGenre {
+    action
+    adventure
+    comedy
+    crime
+    gangster
+    drama
+    epics
+    horror
+    scifi
+    war
+    westerns
 }
