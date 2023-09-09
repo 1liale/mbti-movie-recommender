@@ -1,36 +1,249 @@
-schema {
-    query: Query
-    mutation: Mutation
+input MovieDatumMetumQueryInput {
+  votes_exists: Boolean
+  metascore_exists: Boolean
+  time_nin: [String]
+  rating_lt: String
+  time_ne: String
+  metascore: String
+  time_exists: Boolean
+  certificate_gt: String
+  rating_nin: [String]
+  rating_exists: Boolean
+  time_gte: String
+  time_lt: String
+  votes_nin: [String]
+  rating_gt: String
+  time_in: [String]
+  time_gt: String
+  votes_lte: String
+  metascore_gt: String
+  certificate_lt: String
+  certificate_gte: String
+  rating_ne: String
+  votes_lt: String
+  certificate_lte: String
+  votes_in: [String]
+  votes_ne: String
+  rating: String
+  AND: [MovieDatumMetumQueryInput!]
+  certificate: String
+  rating_lte: String
+  metascore_ne: String
+  time: String
+  certificate_nin: [String]
+  certificate_ne: String
+  metascore_lte: String
+  metascore_lt: String
+  certificate_exists: Boolean
+  OR: [MovieDatumMetumQueryInput!]
+  votes_gte: String
+  metascore_nin: [String]
+  certificate_in: [String]
+  metascore_in: [String]
+  votes: String
+  rating_in: [String]
+  rating_gte: String
+  time_lte: String
+  metascore_gte: String
+  votes_gt: String
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
+
+type DeleteManyPayload {
+  deletedCount: Int!
+}
+
+scalar ObjectId
+
+type MovieDatum {
+  description: String
+  genre: String
+  img_path: String
+  meta: MovieDatumMetum
+  name: String
+  year: String
 }
 
 type Query {
-    getMovie(id: ID!): Movie
+  movie(query: MovieQueryInput): Movie
+  movies(limit: Int = 100, sortBy: MovieSortByInput, query: MovieQueryInput): [Movie]!
 }
 
-type Mutation {
-    addMovie(id: ID!, name: String, description: String, priority: Int, status: TodoStatus): Todo
+input MovieDatumQueryInput {
+  img_path_lt: String
+  name_lte: String
+  img_path_ne: String
+  description_ne: String
+  img_path_nin: [String]
+  name_gt: String
+  description_lt: String
+  name: String
+  name_gte: String
+  genre_gt: String
+  year_in: [String]
+  genre_lte: String
+  img_path_exists: Boolean
+  description_exists: Boolean
+  genre_gte: String
+  img_path_gte: String
+  img_path_lte: String
+  genre: String
+  AND: [MovieDatumQueryInput!]
+  genre_nin: [String]
+  description: String
+  year_gt: String
+  description_lte: String
+  genre_exists: Boolean
+  year_exists: Boolean
+  meta: MovieDatumMetumQueryInput
+  year_ne: String
+  description_nin: [String]
+  name_nin: [String]
+  year_gte: String
+  img_path: String
+  name_lt: String
+  img_path_gt: String
+  name_exists: Boolean
+  name_ne: String
+  year_lt: String
+  OR: [MovieDatumQueryInput!]
+  description_in: [String]
+  genre_lt: String
+  year_lte: String
+  img_path_in: [String]
+  genre_ne: String
+  description_gte: String
+  meta_exists: Boolean
+  year_nin: [String]
+  genre_in: [String]
+  description_gt: String
+  name_in: [String]
+  year: String
+}
+
+enum MovieSortByInput {
+  GENRE_DESC
+  _ID_ASC
+  _ID_DESC
+  GENRE_ASC
+}
+
+input MovieQueryInput {
+  data_in: [MovieDatumQueryInput]
+  _id_in: [String]
+  _id_nin: [String]
+  _id_lt: String
+  _id_exists: Boolean
+  genre_ne: String
+  AND: [MovieQueryInput!]
+  genre: String
+  genre_nin: [String]
+  genre_gt: String
+  _id_gt: String
+  data_nin: [MovieDatumQueryInput]
+  genre_gte: String
+  _id_ne: String
+  _id_lte: String
+  data: [MovieDatumQueryInput]
+  data_exists: Boolean
+  OR: [MovieQueryInput!]
+  _id: String
+  genre_lte: String
+  genre_in: [String]
+  genre_lt: String
+  genre_exists: Boolean
+  _id_gte: String
 }
 
 type Movie {
-    id: ID!
-    name: String
-    genre: MovieGenre
-    description: String
-    mbti_code: String
-    s3_img_path: String
-    s3_trailer_path: String
+  _id: String
+  data: [MovieDatum]
+  genre: String
 }
 
-enum MovieGenre {
-    action
-    adventure
-    comedy
-    crime
-    gangster
-    drama
-    epics
-    horror
-    scifi
-    war
-    westerns
+input MovieDatumMetumUpdateInput {
+  certificate: String
+  metascore_unset: Boolean
+  rating_unset: Boolean
+  time: String
+  votes_unset: Boolean
+  certificate_unset: Boolean
+  metascore: String
+  time_unset: Boolean
+  votes: String
+  rating: String
+}
+
+input MovieInsertInput {
+  _id: String
+  data: [MovieDatumInsertInput]
+  genre: String
+}
+
+type MovieDatumMetum {
+  certificate: String
+  metascore: String
+  rating: String
+  time: String
+  votes: String
+}
+
+input MovieUpdateInput {
+  _id_unset: Boolean
+  data: [MovieDatumUpdateInput]
+  data_unset: Boolean
+  genre: String
+  genre_unset: Boolean
+  _id: String
+}
+
+input MovieDatumInsertInput {
+  meta: MovieDatumMetumInsertInput
+  name: String
+  year: String
+  description: String
+  genre: String
+  img_path: String
+}
+
+type InsertManyPayload {
+  insertedIds: [ObjectId]!
+}
+
+type Mutation {
+  deleteManyMovies(query: MovieQueryInput): DeleteManyPayload
+  deleteOneMovie(query: MovieQueryInput!): Movie
+  insertManyMovies(data: [MovieInsertInput!]!): InsertManyPayload
+  insertOneMovie(data: MovieInsertInput!): Movie
+  replaceOneMovie(query: MovieQueryInput, data: MovieInsertInput!): Movie
+  updateManyMovies(set: MovieUpdateInput!, query: MovieQueryInput): UpdateManyPayload
+  updateOneMovie(query: MovieQueryInput, set: MovieUpdateInput!): Movie
+  upsertOneMovie(query: MovieQueryInput, data: MovieInsertInput!): Movie
+}
+
+input MovieDatumUpdateInput {
+  year: String
+  meta_unset: Boolean
+  genre: String
+  year_unset: Boolean
+  name: String
+  name_unset: Boolean
+  description: String
+  description_unset: Boolean
+  genre_unset: Boolean
+  img_path: String
+  img_path_unset: Boolean
+  meta: MovieDatumMetumUpdateInput
+}
+
+input MovieDatumMetumInsertInput {
+  metascore: String
+  rating: String
+  time: String
+  votes: String
+  certificate: String
 }
