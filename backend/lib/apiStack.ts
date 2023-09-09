@@ -134,7 +134,7 @@ export class AppsyncMongoAPIStack extends Stack {
 			{
 				api,
 				typeName: 'Query',
-				fieldName: 'listAllMovies',
+				fieldName: 'getMovies',
 				runtime: FunctionRuntime.JS_1_0_0,
 				code: Code.fromAsset(
 					join(__dirname, '/graphql/mappings/pipeline.js')

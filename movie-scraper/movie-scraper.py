@@ -1,6 +1,7 @@
 import os
 import time
 import json
+import re
 import requests
 import pandas as pd
 import pymongo
@@ -44,10 +45,10 @@ def scrape_imdb_movies(url: str, interval: float = 0.25, max_items: int = 200) -
                 "votes":movie.select('.sort-num_votes-visible')[0].get_text().strip()
             }
 
-            movie_data = {
-                "name":movie.select('.lister-item-header')[0].get_text().strip(),
-                "year":movie.select('.lister-item-year')[0].get_text().strip(),
-                "genre":movie.select('.genre')[0].get_text().strip(),
+            movie_data = { 
+                "name": re.sub(r"[0-9]\.|\(\d{4}\)", "", movie.select('.lister-item-header')[0].get_text()).strip(),
+                "year":int(re.sub("[^0-9]", "", movie.select('.lister-item-year')[0].get_text())),
+                "genres":movie.select('.genre')[0].get_text().replace(" ", "").replace("\n", "").split(','),
                 "description":movie.select('.text-muted')[2].get_text().strip(),
                 "img_path": movie.select('img')[0]['loadlate'],
                 "meta": meta_data
@@ -97,6 +98,7 @@ if __name__ == "__main__":
         movies_list = scrape_imdb_movies(url, QUERY_INTERVAL, MAX_QUERY_SIZE)
 
         # Write Data to MongoDB Movies collection
-        collection.insert_one({"_id": genre.lower(), "genre": genre, "data": movies_list})
+        for movie in movies_list:
+            collection.insert_one(movie)
     
     print("Scraping complete! Data has been successfully inserted into MongoDB.")
