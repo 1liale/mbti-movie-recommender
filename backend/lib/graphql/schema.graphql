@@ -4,10 +4,8 @@ type Schema {
 }
 
 type Query {
-	listAllMovies(limit: Int, skip: Int): [Movie]
-	getMovies(limit: Int, skip: Int): [Movie]
-#   movie(query: MovieQueryInput): Movie
-#   movies(sortBy: MovieSortByInput, query: MovieQueryInput, limit: Int = 100): [Movie]!
+	listAllMovies(limit: Int, skip: Int): [Movie]!
+	getMovies(sortBy: MovieSortByInput, query: MovieQueryInput, limit: Int, skip: Int): [Movie]!
 }
 
 type Mutation {
