@@ -64,7 +64,7 @@ export class AppsyncMongoAPIStack extends Stack {
 				),
 				runtime: FunctionRuntime.JS_1_0_0,
 			}
-		)
+		);
 
 		// Function to list all movies from MongoDB
 		const listAllMoviesFunction = new AppsyncFunction(
@@ -76,6 +76,21 @@ export class AppsyncMongoAPIStack extends Stack {
 				name: 'listAllMoviesFunction',
 				code: Code.fromAsset(
 					join(__dirname, '/graphql/mappings/resolvers/listAllMovies.js')
+				),
+				runtime: FunctionRuntime.JS_1_0_0
+			}
+		);
+
+		// Function to list all movies from MongoDB
+		const getMoviesFunction = new AppsyncFunction(
+			this,
+			'getMoviesFunction',
+			{
+				api,
+				dataSource: mongoDBAtlasDatasrc,
+				name: 'getMoviesFunction',
+				code: Code.fromAsset(
+					join(__dirname, '/graphql/mappings/resolvers/getMovies.js')
 				),
 				runtime: FunctionRuntime.JS_1_0_0
 			}
@@ -110,7 +125,23 @@ export class AppsyncMongoAPIStack extends Stack {
 				),
 				pipelineConfig: [getMongoSecretFunc, listAllMoviesFunction],
 			}
-		)
+		);
+
+		// Pipeline for listAllMovies function (gets mongodb secrets first)
+		const getMoviesPipelineResolver = new Resolver(
+			this,
+			'getMoviesPipelineResolver',
+			{
+				api,
+				typeName: 'Query',
+				fieldName: 'listAllMovies',
+				runtime: FunctionRuntime.JS_1_0_0,
+				code: Code.fromAsset(
+					join(__dirname, '/graphql/mappings/pipeline.js')
+				),
+				pipelineConfig: [getMongoSecretFunc, listAllMoviesFunction],
+			}
+		);
 
 		// Pipeline for insertMovie function (gets mongodb secrets first)
 		const insertMoviePipelineResolver = new Resolver(
@@ -126,7 +157,7 @@ export class AppsyncMongoAPIStack extends Stack {
 				),
 				pipelineConfig: [getMongoSecretFunc, insertMovieFunction],
 			}
-		)
+		);
 
 
 		new CfnOutput(this, 'appsync api key', {

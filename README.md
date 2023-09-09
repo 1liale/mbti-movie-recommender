@@ -3,11 +3,23 @@
 ## About
 A full-stack serverless web application that recommends movies to users based on their predicted MBTI personality indicators.
 
+![MBTIMoviesHome](assets/MBTIMoviesHome.png)
+
 ### Project Overview:
+
+#### Current Progress: 
+
+- [x] Phase 1
+- [ ] Phase 2
+- [ ] Stage 1
+- [ ] Stage 2
+- [x] Stage 3
+- [ ] Stage 4
+
 Phase 1: Achieve a MVP
 - Stage 1: Setup overall workflow (repository, CI/CD, aws configurations) for serverless application development.
 - Stage 2: Create a rudamentary frontend web interface, api, and provide mock data for backend services (no ml work needed yet). 
-- Stage 3: Set up backend database to correctly feed data for the frontend to use and ensure endpoints are integrated.
+- Stage 3: Set up backend database to correctly feed data to the frontend  and ensure api endpoints are working.
 - Stage 4: Get ML model to work locally and deploy to sagemaker for training and hosting. Integrate with lambda services.
 
 Phase 2: Product improvement (Repeat this phase until objectives are achieved)
@@ -18,7 +30,7 @@ Phase 2: Product improvement (Repeat this phase until objectives are achieved)
 > Time Estimation:
 > ```
 >  Official Start Date: August 19, 2023
->  Expected Completion Dates: Phase 1 by Sep 6, 2023, Phase 2 undetermined   
+>  Expected Completion Dates: Phase 1 by Sep 11, 2023, Phase 2 undetermined   
 > ```
 
 ## Technologies
