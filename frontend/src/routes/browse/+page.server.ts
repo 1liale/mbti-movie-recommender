@@ -5,11 +5,6 @@ import { listAllMovies } from '$graphql/queries';
 import type { ListAllMoviesQuery } from '$graphql/API';
 
 export const load = (async () => {
-	const source = await Auth.Credentials.getCredSource();
-	console.log('SOURCE', source);
-	const isUserLoggedIn = !(source === 'guest' || !source);
-	console.log('isUserLoggedIn', isUserLoggedIn);
-
 	return await API.graphql<GraphQLQuery<ListAllMoviesQuery>>({
 		query: listAllMovies,
 		variables: {},
