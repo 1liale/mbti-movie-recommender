@@ -5,8 +5,11 @@
 	import { Button, ButtonGroup, Dropdown, DropdownItem, Span } from 'flowbite-svelte';
 	import { ChevronDownSolid, ChevronRightSolid } from 'flowbite-svelte-icons';
 	import type { PageServerLoad } from './$types';
+	import { listAllMovies } from '$graphql/queries';
+	import type { ListAllMoviesQuery } from '$graphql/API';
+	import type { GraphQLQuery } from '@aws-amplify/api';
 
-	export let data: PageServerLoad;
+	export let data: GraphQLQuery<ListAllMoviesQuery> | undefined;
 
 	const movieItems: GalleryItem[] = [
 		{ component: MovieCard, props: undefined },
@@ -35,6 +38,8 @@
 
 <svelte:head><title>MBTI Movies - Browse</title></svelte:head>
 
+{#await data?.listAllMovies}
+{:then}
 <Gallery items={movieItems} customClass="gap-6 grid-cols-2 md:grid-cols-4">
 	<div slot="filter-bar" class="flex items-center justify-center py-2 md:py-4 gap-3 mb-3 mx-auto">
 		<Span class="text-black dark:text-white">Sort:</Span>
@@ -66,3 +71,4 @@
 		</Dropdown>
 	</div>
 </Gallery>
+{/await}

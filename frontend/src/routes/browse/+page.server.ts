@@ -10,11 +10,10 @@ export const load = (async () => {
 	const isUserLoggedIn = !(source === 'guest' || !source);
 	console.log('isUserLoggedIn', isUserLoggedIn);
 
-	return {
-		streamed: await API.graphql<GraphQLQuery<ListAllMoviesQuery>>({
+	return await API.graphql<GraphQLQuery<ListAllMoviesQuery>>({
 			query: listAllMovies,
 			variables: {},
 			authMode: GRAPHQL_AUTH_MODE.AWS_IAM
 		})
-	};
+	
 }) satisfies PageServerLoad;

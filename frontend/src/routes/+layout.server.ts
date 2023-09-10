@@ -21,7 +21,9 @@ export const load = (async () => {
 			identityPoolId: IDENTITYPOOL_ID,
 			mandatorySignIn: false
 		},
-
+		aws_cognito_region: APPSYNC_REGION,
+		aws_user_pools_id: USERPOOL_ID,
+		aws_user_web_client_id: USERPOOL_CLIENTID,
 		aws_congito_identity_pool_id: IDENTITYPOOL_ID,
 		aws_project_region: APPSYNC_REGION,
 		aws_appsync_graphqlEndpoint: APPSYNC_GRAPHQL_URL,
