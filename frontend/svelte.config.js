@@ -16,7 +16,7 @@ const config = {
 			$components: './src/components',
 			$stores: './src/stores',
 			$assets: './src/assets',
-			$graphql: './src/graphql',
+			$graphql: './src/graphql'
 		}
 	}
 };
