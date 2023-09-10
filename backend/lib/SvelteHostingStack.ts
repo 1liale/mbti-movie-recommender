@@ -37,11 +37,12 @@ export class AmplifyHostingStack extends Stack {
 			buildSpec: codebuild.BuildSpec.fromObjectToYaml({
 				version: 1,
 				frontend: {
+					buildpath: "frontend/",
 					phases: {
 						preBuild: {
 							commands: [
-								'cd frontend',
-								'npx pnpm install'
+								'ls',
+								'npm ci'
 							],
 						},
 						build: {
@@ -54,16 +55,16 @@ export class AmplifyHostingStack extends Stack {
 								'APPSYNC_API_ID=$APPSYNC_API_ID',
 								'APPSYNC_API_KEY=$APPSYNC_API_KEY',
 								'APPSYNC_GRAPHQL_URL=$APPSYNC_GRAPHQL_URL',
-								'npx pnpm build'
+								'npm run build'
 							],
 						},
 					},
 					artifacts: {
-						baseDirectory: 'frontend/build/',
+						baseDirectory: 'build/',
 						files: ['**/*'],
 					},
 					cache: {
-						paths: ['frontend/node_modules/**/*'],
+						paths: ['node_modules/**/*'],
 					},
 				},
 			}),
