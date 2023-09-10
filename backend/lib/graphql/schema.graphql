@@ -4,41 +4,217 @@ type Schema {
 }
 
 type Query {
-	listApplicants(limit: Int, skip: Int): [Applicant]
+	listAllMovies(limit: Int, skip: Int): [Movie]!
+	getMovies(sortBy: MovieSortByInput, query: MovieQueryInput, limit: Int, skip: Int): [Movie]!
 }
 
 type Mutation {
-	addApplicant(input: ApplicantInput!): Applicant
+	insertMovie(data: MovieInsertInput!): Movie
+#   deleteManyMovies(query: MovieQueryInput): DeleteManyPayload
+#   deleteOneMovie(query: MovieQueryInput!): Movie
+#   insertManyMovies(data: [MovieInsertInput!]!): InsertManyPayload
+#   insertOneMovie(data: MovieInsertInput!): Movie
+#   replaceOneMovie(query: MovieQueryInput, data: MovieInsertInput!): Movie
+#   updateManyMovies(query: MovieQueryInput, set: MovieUpdateInput!): UpdateManyPayload
+#   updateOneMovie(query: MovieQueryInput, set: MovieUpdateInput!): Movie
+#   upsertOneMovie(query: MovieQueryInput, data: MovieInsertInput!): Movie
 }
 
-type Applicant {
-	id: ID
-	name: String
-	email: AWSEmail
-	phoneNumber: AWSPhone
-	employmentStatus: EMPLOYMENT_STATUS_ENUM
-	startDate: AWSDate
-	focusArea: FOCUS_AREA_ENUM
-	createdAt: AWSDateTime
-	updatedAt: AWSDateTime
+type Movie {
+  _id: ID
+  description: String
+  genres: [String]
+  img_path: String
+  meta: MovieMetum
+  name: String
+  year: Int
 }
 
-input ApplicantInput {
-	id: ID
-	name: String!
-	email: AWSEmail!
-	phoneNumber: AWSPhone
-	employmentStatus: EMPLOYMENT_STATUS_ENUM!
-	startDate: AWSDate!
-	focusArea: FOCUS_AREA_ENUM!
+type MovieMetum {
+  certificate: String
+  metascore: String
+  rating: String
+  time: String
+  votes: String
 }
 
-enum EMPLOYMENT_STATUS_ENUM {
-	EMPLOYED
-	UNEMPLOYED
+type DeleteManyPayload {
+  deletedCount: Int!
 }
 
-enum FOCUS_AREA_ENUM {
-	FRONTEND
-	BACKEND
+type InsertManyPayload {
+  insertedIds: [ID]!
+}
+
+type UpdateManyPayload {
+  matchedCount: Int!
+  modifiedCount: Int!
+}
+
+input MovieInsertInput {
+  name: String
+  year: Int
+  _id: ID
+  description: String
+  genres: [String]
+  img_path: String
+  meta: MovieMetumInsertInput
+}
+
+input MovieMetumQueryInput {
+  certificate: String
+  certificate_exists: Boolean
+  metascore_exists: Boolean
+  certificate_in: [String]
+  metascore: String
+  rating_gte: String
+  rating_lt: String
+  votes_ne: String
+  metascore_in: [String]
+  metascore_ne: String
+  time_gte: String
+  rating_exists: Boolean
+  votes_in: [String]
+  rating_nin: [String]
+  rating: String
+  certificate_nin: [String]
+  rating_ne: String
+  metascore_lt: String
+  votes_gte: String
+  votes_gt: String
+  certificate_gt: String
+  time_in: [String]
+  time_lte: String
+  OR: [MovieMetumQueryInput!]
+  time: String
+  votes_lte: String
+  time_gt: String
+  time_nin: [String]
+  certificate_ne: String
+  certificate_lte: String
+  AND: [MovieMetumQueryInput!]
+  votes: String
+  rating_in: [String]
+  rating_lte: String
+  votes_lt: String
+  votes_nin: [String]
+  metascore_lte: String
+  time_exists: Boolean
+  time_ne: String
+  metascore_nin: [String]
+  certificate_lt: String
+  certificate_gte: String
+  metascore_gte: String
+  rating_gt: String
+  metascore_gt: String
+  time_lt: String
+  votes_exists: Boolean
+}
+
+input MovieUpdateInput {
+  year_unset: Boolean
+  _id_unset: Boolean
+  img_path: String
+  description: String
+  img_path_unset: Boolean
+  year_inc: Int
+  genres: [String]
+  genres_unset: Boolean
+  _id: ID
+  name: String
+  year: Int
+  meta: MovieMetumUpdateInput
+  description_unset: Boolean
+  meta_unset: Boolean
+  name_unset: Boolean
+}
+
+input MovieMetumUpdateInput {
+  rating_unset: Boolean
+  votes: String
+  metascore: String
+  certificate_unset: Boolean
+  time: String
+  votes_unset: Boolean
+  metascore_unset: Boolean
+  rating: String
+  time_unset: Boolean
+  certificate: String
+}
+
+input MovieQueryInput {
+  _id_gte: ID
+  meta_exists: Boolean
+  year_gte: Int
+  _id_lte: ID
+  description_lt: String
+  img_path_gt: String
+  genres_nin: [String]
+  name: String
+  img_path_gte: String
+  meta: MovieMetumQueryInput
+  _id: ID
+  year_ne: Int
+  img_path: String
+  year_lt: Int
+  name_gte: String
+  description_nin: [String]
+  name_lte: String
+  _id_nin: [ID]
+  img_path_nin: [String]
+  name_exists: Boolean
+  description_gt: String
+  img_path_ne: String
+  img_path_lt: String
+  name_ne: String
+  name_in: [String]
+  year_in: [Int]
+  description_lte: String
+  img_path_in: [String]
+  _id_lt: ID
+  _id_ne: ID
+  year_nin: [Int]
+  name_gt: String
+  img_path_exists: Boolean
+  _id_exists: Boolean
+  name_lt: String
+  description_ne: String
+  OR: [MovieQueryInput!]
+  year: Int
+  genres_in: [String]
+  genres_exists: Boolean
+  description_exists: Boolean
+  _id_gt: ID
+  AND: [MovieQueryInput!]
+  name_nin: [String]
+  _id_in: [ID]
+  img_path_lte: String
+  genres: [String]
+  description_gte: String
+  description_in: [String]
+  year_gt: Int
+  description: String
+  year_lte: Int
+  year_exists: Boolean
+}
+
+input MovieMetumInsertInput {
+  votes: String
+  certificate: String
+  metascore: String
+  rating: String
+  time: String
+}
+
+enum MovieSortByInput {
+  YEAR_ASC
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  IMG_PATH_ASC
+  IMG_PATH_DESC
+  NAME_ASC
+  _ID_ASC
+  _ID_DESC
+  NAME_DESC
+  YEAR_DESC
 }

@@ -18,12 +18,12 @@ Movie Model (i.e displayed in Modal or MovieCard components when queried)
 
 ```
 Movie
-- id
 - name
-- category
-- mbti_code
-- s3_img_path
-- s3_trailer_path
+- year
+- genre
+- description
+- img_path
+- meta
 ```
 
 > No User model configured yet, might introduce later to make use of Collaborative Filtering techniques (here's an idea)
