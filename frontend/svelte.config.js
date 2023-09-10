@@ -15,7 +15,8 @@ const config = {
 		alias: {
 			$components: './src/components',
 			$stores: './src/stores',
-			$assets: './src/assets'
+			$assets: './src/assets',
+			$graphql: './src/graphql',
 		}
 	}
 };

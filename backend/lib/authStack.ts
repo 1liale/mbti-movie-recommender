@@ -1,18 +1,23 @@
-import { CfnOutput, Stack } from 'aws-cdk-lib'
+import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib'
 import {
 	AccountRecovery,
 	UserPool,
 	UserPoolClient,
 	VerificationEmailStyle,
 } from 'aws-cdk-lib/aws-cognito'
+
 import { Construct } from 'constructs'
+
+interface AuthStackProps extends StackProps {}
 
 export class AuthStack extends Stack {
 	public readonly userpool: UserPool
-	constructor(scope: Construct, id: string) {
-		super(scope, id)
+	public readonly userPoolClient: UserPoolClient
 
-		const userPool = new UserPool(this, `MbtiMovieUserPool`, {
+	constructor(scope: Construct, id: string, props: AuthStackProps) {
+		super(scope, id, props)
+
+		const userPool = new UserPool(this, `MBTIMoviesUserpool`, {
 			selfSignUpEnabled: true,
 			accountRecovery: AccountRecovery.PHONE_AND_EMAIL,
 			userVerification: {
@@ -29,21 +34,17 @@ export class AuthStack extends Stack {
 			},
 		})
 
-		const userPoolClient = new UserPoolClient(
-			this,
-			`MbtiMoviesUserPoolClient`,
-			{
-				userPool,
-			}
-		)
+		const userPoolClient = new UserPoolClient(this, `MTBIMoviesUserpoolClient`, {
+			userPool,
+		})
 
 		this.userpool = userPool
+		this.userPoolClient = userPoolClient
 
-		// logging in cdk
+		// Outputs UserPoolId and UserPoolClientIds into the console at deploy time
 		new CfnOutput(this, 'UserPoolId', {
 			value: userPool.userPoolId,
 		})
-
 		new CfnOutput(this, 'UserPoolClientId', {
 			value: userPoolClient.userPoolClientId,
 		})

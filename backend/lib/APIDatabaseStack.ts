@@ -1,10 +1,15 @@
-import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib'
-import { AppsyncFunction, AuthorizationType, Code, FunctionRuntime, GraphqlApi, Resolver, SchemaFile } from 'aws-cdk-lib/aws-appsync';
-import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { IdentityPool } from '@aws-cdk/aws-cognito-identitypool-alpha';
+import { CfnOutput, Duration, Expiration, Stack, StackProps } from 'aws-cdk-lib'
+import { AppsyncFunction, AuthorizationType, Code, FieldLogLevel, FunctionRuntime, GraphqlApi, Resolver, SchemaFile, UserPoolDefaultAction } from 'aws-cdk-lib/aws-appsync';
+import { UserPool } from 'aws-cdk-lib/aws-cognito';
+import { IRole, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { join } from 'path';
 
 interface AppsyncMongoAPIStackProps extends StackProps {
+	userpool: UserPool
+	unauthenticatedRole: IRole
+	identityPool: IdentityPool
 	MONGO_SECRET_ARN: string;
 }
 
@@ -21,9 +26,29 @@ export class AppsyncMongoAPIStack extends Stack {
 			authorizationConfig: {
 				defaultAuthorization: {
 					authorizationType: AuthorizationType.API_KEY,
+					apiKeyConfig: {
+						description: 'public key for getting data',
+						expires: Expiration.after(Duration.days(30)),
+						name: 'API Token',
+					},
 				},
+				additionalAuthorizationModes: [
+					{ authorizationType: AuthorizationType.IAM },
+					{ authorizationType: AuthorizationType.USER_POOL,
+						userPoolConfig: {
+							defaultAction: UserPoolDefaultAction.ALLOW,
+							userPool: props.userpool,
+						}	
+					},
+				],
 			},
+			logConfig: {
+				fieldLogLevel: FieldLogLevel.ALL,
+			},
+			xrayEnabled: true, // allows using AWS Xray to better trace bugs/erros
 		});
+
+		api.grantQuery(props.unauthenticatedRole) // grants all query access by default to an unauthenticated user
 
 		// Secrets Manager Datasource
 		const SMDatasrc = api.addHttpDataSource(
@@ -159,15 +184,10 @@ export class AppsyncMongoAPIStack extends Stack {
 			}
 		);
 
-
-		new CfnOutput(this, 'appsync api key', {
-			value: api.apiKey!,
-		});
-
-		new CfnOutput(this, 'appsync endpoint', {
+		// Outputs 
+		new CfnOutput(this, 'appsync graphql url endpoint', {
 			value: api.graphqlUrl,
 		});
-
 		new CfnOutput(this, 'appsync apiId', {
 			value: api.apiId,
 		});

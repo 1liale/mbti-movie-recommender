@@ -4,6 +4,9 @@
 	import type { GalleryItem } from '$components/general/Gallery/Gallery.types';
 	import { Button, ButtonGroup, Dropdown, DropdownItem, Span } from 'flowbite-svelte';
 	import { ChevronDownSolid, ChevronRightSolid } from 'flowbite-svelte-icons';
+	import type { PageServerLoad } from './$types';
+
+	export let data: PageServerLoad;
 
 	const movieItems: GalleryItem[] = [
 		{ component: MovieCard, props: undefined },
@@ -26,6 +29,9 @@
 		{ component: MovieCard, props: undefined },
 		{ component: MovieCard, props: undefined }
 	];
+
+	$: console.log(data);
+	
 </script>
 
 <svelte:head><title>MBTI Movies - Browse</title></svelte:head>
