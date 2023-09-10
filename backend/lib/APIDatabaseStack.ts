@@ -29,14 +29,16 @@ export class AppsyncMongoAPIStack extends Stack {
 			),
 			authorizationConfig: {
 				defaultAuthorization: {
-					authorizationType: AuthorizationType.USER_POOL,
-					userPoolConfig: {
-						defaultAction: UserPoolDefaultAction.ALLOW,
-						userPool: props.userpool,
-					}
+					authorizationType: AuthorizationType.IAM
 				},
 				additionalAuthorizationModes: [
-					{ authorizationType: AuthorizationType.IAM },
+					{
+						authorizationType: AuthorizationType.USER_POOL,
+						userPoolConfig: {
+							defaultAction: UserPoolDefaultAction.ALLOW,
+							userPool: props.userpool,
+						} 
+					},
 					{ 
 						authorizationType: AuthorizationType.API_KEY,
 						apiKeyConfig: {

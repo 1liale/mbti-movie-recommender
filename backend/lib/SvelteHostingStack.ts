@@ -59,11 +59,11 @@ export class AmplifyHostingStack extends Stack {
 						},
 					},
 					artifacts: {
-						baseDirectory: 'build/',
+						baseDirectory: 'frontend/build/',
 						files: ['**/*'],
 					},
 					cache: {
-						paths: ['node_modules/**/*'],
+						paths: ['frontend/node_modules/**/*'],
 					},
 				},
 			}),
