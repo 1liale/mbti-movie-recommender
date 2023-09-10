@@ -14,6 +14,10 @@ interface AppsyncMongoAPIStackProps extends StackProps {
 }
 
 export class AppsyncMongoAPIStack extends Stack {
+	public readonly graphqlURL: string
+	public readonly apiId: string
+	public readonly apiKey: string
+
 	constructor(scope: Construct, id: string, props: AppsyncMongoAPIStackProps) {
 		super(scope, id, props);
 
@@ -25,21 +29,21 @@ export class AppsyncMongoAPIStack extends Stack {
 			),
 			authorizationConfig: {
 				defaultAuthorization: {
-					authorizationType: AuthorizationType.API_KEY,
-					apiKeyConfig: {
-						description: 'public key for getting data',
-						expires: Expiration.after(Duration.days(365)),
-						name: 'API Token',
-					},
+					authorizationType: AuthorizationType.USER_POOL,
+					userPoolConfig: {
+						defaultAction: UserPoolDefaultAction.ALLOW,
+						userPool: props.userpool,
+					}
 				},
 				additionalAuthorizationModes: [
 					{ authorizationType: AuthorizationType.IAM },
 					{ 
-						authorizationType: AuthorizationType.USER_POOL,
-						userPoolConfig: {
-							defaultAction: UserPoolDefaultAction.ALLOW,
-							userPool: props.userpool,
-						}	
+						authorizationType: AuthorizationType.API_KEY,
+						apiKeyConfig: {
+						description: 'public key for getting data',
+						expires: Expiration.after(Duration.days(365)),
+						name: 'API Token',
+					},	
 					},
 				],
 			},
@@ -184,6 +188,10 @@ export class AppsyncMongoAPIStack extends Stack {
 				pipelineConfig: [getMongoSecretFunc, insertMovieFunction],
 			}
 		);
+
+		this.graphqlURL = api.graphqlUrl;
+		this.apiId = api.apiId;
+		this.apiKey = api.apiKey!;
 
 		// Outputs 
 		new CfnOutput(this, 'appsync api key', {

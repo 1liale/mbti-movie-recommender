@@ -14,9 +14,7 @@ export const load = (async () => {
 		streamed: await API.graphql<GraphQLQuery<ListAllMoviesQuery>>({
 			query: listAllMovies,
 			variables: {},
-			authMode: isUserLoggedIn
-				? GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS
-				: GRAPHQL_AUTH_MODE.API_KEY
+			authMode: GRAPHQL_AUTH_MODE.AWS_IAM
 		})
 	};
 }) satisfies PageServerLoad;
