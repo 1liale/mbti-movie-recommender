@@ -3,7 +3,7 @@
 ## About
 A full-stack serverless web application that recommends movies to users based on their predicted MBTI personality indicators.
 
-![MBTIMoviesHome](assets/MBTIMoviesHome.png)
+![MBTIMoviesHome](assets/MbtiMoviesHome.png)
 
 ### Project Overview:
 
