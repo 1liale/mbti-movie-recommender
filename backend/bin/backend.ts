@@ -38,7 +38,7 @@ new AmplifyHostingStack(
 			USERPOOL_CLIENTID: authStack.userPoolClient.userPoolClientId,
 			IDENTITYPOOL_ID: identityStack.identityPool.identityPoolId,
 			APPSYNC_REGION:"us-east-1",
-			APPSYNC_AUTHENTICATION_TYPE:"AWS_IAM",
+			APPSYNC_AUTHENTICATION_TYPE:"AMAZON_COGNITO_USER_POOLS",
 			APPSYNC_API_ID:apiStack.apiId,
 			APPSYNC_API_KEY:apiStack.apiKey,
 			APPSYNC_GRAPHQL_URL: apiStack.graphqlURL,
