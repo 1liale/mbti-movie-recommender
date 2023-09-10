@@ -28,13 +28,14 @@ export class AppsyncMongoAPIStack extends Stack {
 					authorizationType: AuthorizationType.API_KEY,
 					apiKeyConfig: {
 						description: 'public key for getting data',
-						expires: Expiration.after(Duration.days(30)),
+						expires: Expiration.after(Duration.days(365)),
 						name: 'API Token',
 					},
 				},
 				additionalAuthorizationModes: [
 					{ authorizationType: AuthorizationType.IAM },
-					{ authorizationType: AuthorizationType.USER_POOL,
+					{ 
+						authorizationType: AuthorizationType.USER_POOL,
 						userPoolConfig: {
 							defaultAction: UserPoolDefaultAction.ALLOW,
 							userPool: props.userpool,
@@ -185,6 +186,9 @@ export class AppsyncMongoAPIStack extends Stack {
 		);
 
 		// Outputs 
+		new CfnOutput(this, 'appsync api key', {
+			value: api.apiKey!,
+		});
 		new CfnOutput(this, 'appsync graphql url endpoint', {
 			value: api.graphqlUrl,
 		});
