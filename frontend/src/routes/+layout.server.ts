@@ -11,7 +11,7 @@ import type { LayoutServerLoad } from './$types';
 import { Amplify } from 'aws-amplify';
 
 export const load = (async () => {
-	console.log("TEST ENV LOAD", APPSYNC_REGION)
+	console.log('TEST ENV LOAD', APPSYNC_REGION);
 	// configure Amplify auth and environments
 	Amplify.configure({
 		Auth: {
