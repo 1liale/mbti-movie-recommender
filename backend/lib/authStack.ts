@@ -32,6 +32,12 @@ export class AuthStack extends Stack {
 					mutable: true,
 				},
 			},
+		});
+
+		userPool.addDomain("default", {
+			cognitoDomain: {
+				domainPrefix: "mbti-movies-recommender"
+			}
 		})
 
 		const userPoolClient = new UserPoolClient(this, `MTBIMoviesUserpoolClient`, {
