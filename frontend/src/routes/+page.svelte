@@ -21,15 +21,7 @@
 <div class="flex flex-col grow items-center justify-start gap-12 mt-60 px-8">
 	<div class="flex flex-col items-center text-center">
 		<Heading id="search-heading" class="text-white dark:text-gray-200 dark:font-semibold" tag="h2">
-			<Typewriter
-				on:done={() => {
-					console.log('DONE TYPING');
-				}}
-				scrambleDuration={2000}
-				mode="scramble"
-			>
-				MBTI Movies Recommender
-			</Typewriter>
+			<Typewriter scrambleDuration={2000} mode="scramble">MBTI Movies Recommender</Typewriter>
 		</Heading>
 	</div>
 	<ButtonGroup id="input-search" class="w-2/3">

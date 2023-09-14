@@ -15,7 +15,6 @@ export const setModal = (modalState: ModalState) => {
 export const toggleModal = () => {
 	ModalUIState.update((state) => {
 		state.isOpened = !state.isOpened;
-		console.log('toggled', state);
 		return state;
 	});
 };
