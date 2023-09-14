@@ -26,24 +26,25 @@ const apiStack = new AppsyncMongoAPIStack(app, 'AppsyncMongoAPIStack', {
 	MONGO_SECRET_ARN: `arn:aws:secretsmanager:${process.env.CDK_DEFAULT_REGION}:${process.env.CDK_DEFAULT_ACCOUNT}:secret:APPSYNC_MONGO_API_KEY-cpVjih`,
 });
 
-new AmplifyHostingStack(
-	app,
-	'AmplifyHostingStack',
-	{
-		githubOauthTokenName: 'github-token',
-		owner: '1liale',
-		repository: 'mbti-movie-recommender',
-		envVariables: {
-			USERPOOL_ID: authStack.userpool.userPoolId,
-			USERPOOL_CLIENTID: authStack.userPoolClient.userPoolClientId,
-			IDENTITYPOOL_ID: identityStack.identityPool.identityPoolId,
-			APPSYNC_REGION:"us-east-1",
-			APPSYNC_AUTHENTICATION_TYPE:"AMAZON_COGNITO_USER_POOLS",
-			APPSYNC_API_ID:apiStack.apiId,
-			APPSYNC_API_KEY:apiStack.apiKey,
-			APPSYNC_GRAPHQL_URL: apiStack.graphqlURL,
-		},
-	}
-)
+// (deployment solution outdated) TODO: Transition to deployment on vercel
+// new AmplifyHostingStack(
+// 	app,
+// 	'AmplifyHostingStack',
+// 	{
+// 		githubOauthTokenName: 'github-token',
+// 		owner: '1liale',
+// 		repository: 'mbti-movie-recommender',
+// 		envVariables: {
+// 			USERPOOL_ID: authStack.userpool.userPoolId,
+// 			USERPOOL_CLIENTID: authStack.userPoolClient.userPoolClientId,
+// 			IDENTITYPOOL_ID: identityStack.identityPool.identityPoolId,
+// 			APPSYNC_REGION:"us-east-1",
+// 			APPSYNC_AUTHENTICATION_TYPE:"AMAZON_COGNITO_USER_POOLS",
+// 			APPSYNC_API_ID:apiStack.apiId,
+// 			APPSYNC_API_KEY:apiStack.apiKey,
+// 			APPSYNC_GRAPHQL_URL: apiStack.graphqlURL,
+// 		},
+// 	}
+// )
 
 app.synth();

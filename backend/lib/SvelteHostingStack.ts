@@ -6,7 +6,6 @@ import {
 	GitHubSourceCodeProvider,
 	RedirectStatus,
 } from '@aws-cdk/aws-amplify-alpha';
-import { CfnApp } from 'aws-cdk-lib/aws-amplify';
 
 interface HostingStackProps extends StackProps {
 	readonly owner: string
