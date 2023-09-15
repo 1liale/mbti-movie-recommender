@@ -4,7 +4,7 @@ import * as cdk from 'aws-cdk-lib';
 import { AppsyncMongoAPIStack } from '../lib/APIDatabaseStack';
 import { IdentityStack } from '../lib/IdentityStack';
 import { AuthStack } from '../lib/AuthStack';
-import { AmplifyHostingStack } from '../lib/SvelteHostingStack';
+// import { AmplifyHostingStack } from '../lib/SvelteHostingStack';
 
 
 const app = new cdk.App();
