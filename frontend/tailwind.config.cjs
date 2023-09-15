@@ -5,10 +5,7 @@ const config = {
 		'./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'
 	],
 
-	plugins: [
-		require('flowbite/plugin'), 
-		require('@tailwindcss/line-clamp'),
-	],
+	plugins: [require('flowbite/plugin'), require('@tailwindcss/line-clamp')],
 
 	darkMode: 'class',
 

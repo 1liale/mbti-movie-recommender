@@ -27,23 +27,19 @@ const awsAuthConfig = {
 		mandatorySignIn: false,
 		oath: {
 			domain: COGNITO_DOMAIN,
-			scope: [
-				'email', 
-				'openid', 
-				'profile'
-			],
+			scope: ['email', 'openid', 'profile'],
 			redirectSignIn: 'http://localhost:5173',
 			redirectSignOut: 'http://localhost:5173',
-			responseType: 'code',
-		},
-	},
+			responseType: 'code'
+		}
+	}
 };
 
 export const load = (async () => {
 	// configure Amplify auth and environments
 	Amplify.configure(awsAuthConfig);
-	
-	return { 
-		initReq: {status: 200, msg: 'Amplify auth successful!'} 
+
+	return {
+		initReq: { status: 200, msg: 'Amplify auth successful!' }
 	};
 }) satisfies LayoutServerLoad;

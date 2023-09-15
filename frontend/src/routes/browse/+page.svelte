@@ -8,28 +8,29 @@
 	export let data;
 
 	const result = data.result.data?.listAllMovies;
-	const items: GalleryItem[] = result?.map((item) => {
-		const movieItem: MovieItem = {
-			name: item?.name,
-			year: item?.year,
-			description: item?.description,
-			genres: item?.genres as string[],
-			img_path: item?.img_path || '',
-			meta: {
-				certificate: item?.meta?.certificate,
-				metascore: item?.meta?.metascore,
-				rating: item?.meta?.rating,
-				time: item?.meta?.time,
-				votes: item?.meta?.votes
-			}
-		}
+	const items: GalleryItem[] =
+		result?.map((item) => {
+			const movieItem: MovieItem = {
+				name: item?.name,
+				year: item?.year,
+				description: item?.description,
+				genres: item?.genres as string[],
+				img_path: item?.img_path || '',
+				meta: {
+					certificate: item?.meta?.certificate,
+					metascore: item?.meta?.metascore,
+					rating: item?.meta?.rating,
+					time: item?.meta?.time,
+					votes: item?.meta?.votes
+				}
+			};
 
-		const galleryItem: GalleryItem = {
-			component: MovieCard,
-			props: { value: movieItem }
-		}
-		return galleryItem
-	}) || []
+			const galleryItem: GalleryItem = {
+				component: MovieCard,
+				props: { value: movieItem }
+			};
+			return galleryItem;
+		}) || [];
 </script>
 
 <svelte:head><title>MBTI Movies - Browse</title></svelte:head>
