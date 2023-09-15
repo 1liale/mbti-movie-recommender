@@ -75,10 +75,7 @@
 						>
 					</Dropdown>
 				{:else}
-					<Button
-						on:click={() => {
-							isSignedInTest = true;
-						}}>Sign in</Button
+					<Button href="https://mbti-movies-recommender.auth.us-east-1.amazoncognito.com/login?client_id=56t287m4ic3kpkbi9rmjas7itf&response_type=code&scope=email+openid+profile&redirect_uri=http://localhost:5173">Sign in</Button
 					>
 				{/if}
 			</div>

@@ -1,6 +1,7 @@
 import { CfnOutput, Stack, StackProps } from 'aws-cdk-lib'
 import {
 	AccountRecovery,
+	OAuthScope,
 	UserPool,
 	UserPoolClient,
 	VerificationEmailStyle,
@@ -42,6 +43,20 @@ export class AuthStack extends Stack {
 
 		const userPoolClient = new UserPoolClient(this, `MTBIMoviesUserpoolClient`, {
 			userPool,
+			// user pool client configurations
+			generateSecret: false,
+			oAuth: {
+				flows: {
+					authorizationCodeGrant: true,
+					implicitCodeGrant: true,
+				},
+				scopes: [OAuthScope.EMAIL, OAuthScope.OPENID, OAuthScope.PROFILE],
+				callbackUrls: [
+					`https://example.com`,
+					`http://localhost:5173`,
+					`http://localhost:5174`,
+				]
+			}
 		})
 
 		this.userpool = userPool
