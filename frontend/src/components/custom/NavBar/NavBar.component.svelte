@@ -2,8 +2,12 @@
 	import Logo from '$assets/logo.png';
 	import { page } from '$app/stores';
 	import {
+		Avatar,
 		Button,
 		DarkMode,
+		Dropdown,
+		DropdownHeader,
+		DropdownItem,
 		Heading,
 		Input,
 		NavBrand,
@@ -23,6 +27,8 @@
 	export let customStyle: string | undefined = '';
 
 	$: activeUrl = $page.url.pathname;
+
+	let isSignedInTest: boolean = false;
 </script>
 
 {#if !isHidden}
@@ -52,6 +58,28 @@
 					<SearchOutline class="w-4 h-4" />
 				</div>
 				<Input id="search-navbar" class="pl-10" placeholder="Search..." />
+			</div>
+			<div class="flex items-center md:order-2 pl-3 hover:cursor-pointer">
+				{#if isSignedInTest}
+					<Avatar class="hover:bg-gray-200 dark:hover:bg-gray-700" border id="avatar-menu">U</Avatar
+					>
+					<Dropdown border triggeredBy="#avatar-menu">
+						<DropdownHeader>
+							<span class="block text-sm">Jane Doe</span>
+							<span class="block truncate text-sm font-medium">JaneDoe123@gmail.com</span>
+						</DropdownHeader>
+						<DropdownItem
+							on:click={() => {
+								isSignedInTest = false;
+							}}>Sign out</DropdownItem
+						>
+					</Dropdown>
+				{:else}
+					<Button
+						href="https://mbti-movies-recommender.auth.us-east-1.amazoncognito.com/login?client_id=56t287m4ic3kpkbi9rmjas7itf&response_type=code&scope=email+openid+profile&redirect_uri=http://localhost:5173"
+						>Sign in</Button
+					>
+				{/if}
 			</div>
 			<DarkMode class="ml-3 border-gray-300 dark:border-gray-500 border" />
 			<NavHamburger on:click={toggle} />

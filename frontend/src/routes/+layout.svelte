@@ -6,9 +6,6 @@
 	import Modal from '$components/general/Modal/Modal.component.svelte';
 
 	const isDevEnv = import.meta.env.DEV;
-
-	export let data;
-	$: console.log(data);
 </script>
 
 <div
