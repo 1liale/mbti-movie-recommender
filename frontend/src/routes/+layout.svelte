@@ -4,6 +4,7 @@
 
 	import '../app.css';
 	import Modal from '$components/general/Modal/Modal.component.svelte';
+	import { page } from '$app/stores';
 
 	const isDevEnv = import.meta.env.DEV;
 </script>

@@ -35,7 +35,7 @@ export class AuthStack extends Stack {
 			},
 		});
 
-		userPool.addDomain("default", {
+		const userPoolDomain = userPool.addDomain("default", {
 			cognitoDomain: {
 				domainPrefix: "mbti-movies-recommender"
 			}
@@ -44,27 +44,31 @@ export class AuthStack extends Stack {
 		const userPoolClient = new UserPoolClient(this, `MTBIMoviesUserpoolClient`, {
 			userPool,
 			// user pool client configurations
-			generateSecret: false,
+			generateSecret: false, // IMPORTANT: must be false, sdk doesn't support app clients with secrets
 			oAuth: {
 				flows: {
 					authorizationCodeGrant: true,
-					implicitCodeGrant: true,
+					implicitCodeGrant: false,
+					clientCredentials: false,
 				},
-				scopes: [OAuthScope.EMAIL, OAuthScope.OPENID, OAuthScope.PROFILE],
+				scopes: [OAuthScope.EMAIL, OAuthScope.OPENID],
 				callbackUrls: [
-					`https://example.com`,
-					`http://localhost:5173`,
-					`http://localhost:5174`,
+					`http://localhost:5173/auth/login`,
+				],
+				logoutUrls: [
+					`http://localhost:5173`
 				]
-			}
+			},
 		})
 
 		this.userpool = userPool
 		this.userPoolClient = userPoolClient
 
-		// Outputs UserPoolId and UserPoolClientIds into the console at deploy time
 		new CfnOutput(this, 'UserPoolId', {
 			value: userPool.userPoolId,
+		})
+		new CfnOutput(this, 'UserPoolDomain', {
+			value: `https://${userPoolDomain.domainName}.auth.us-east-1.amazoncognito.com`
 		})
 		new CfnOutput(this, 'UserPoolClientId', {
 			value: userPoolClient.userPoolClientId,
