@@ -1,38 +1,29 @@
-# create-svelte
+# MBTI Movies Recommender - frontend
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Tools
+1. Sveltekit framework - file based routing, SSR, and fast development
+2. Flowbite - a ui library to reduce time spent designing UI aesthetics and can more quickly develop new features.
+3. TailwindCSS - A powerful alternative/addition to vanilla CSS when used alongside the Flowbite library to quickly setup Theme control and develop new components without having to maintain a separate CSS file.
+4. Husky - CI integration with git pre-commit and pre-push hooks to run lint checks and build checks to ensure code quality before pushing to GitHub.
+5. Amplify Codegen - generated GraphQL types and functions that can be used throughout the code using a GraphQL schema.
+6. Amplify SDK - used to make both unauthenticated and authenticated requests to backend services.
 
-## Creating a project
+## Start
 
-If you're seeing this, you've probably already done this step. Congrats!
+To install run either `pnpm i --frozen-lockfile` or `pnpm i` if the lockfile is not present
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Next, run `cp local-env .env` to load the necessary environment variables
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Then execute `pnpm dev` to run the program locally
 
 ## Building
 
 To create a production version of your app:
 
 ```bash
-npm run build
+pnpm build
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+You can preview the production build with `pnpm preview`.
