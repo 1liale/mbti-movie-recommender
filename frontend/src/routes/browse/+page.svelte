@@ -7,7 +7,7 @@
 
 	export let data;
 
-	const result = data.result.data?.listAllMovies;
+	const result = data?.result?.data?.listAllMovies;
 	const items: GalleryItem[] =
 		result?.map((item) => {
 			const movieItem: MovieItem = {

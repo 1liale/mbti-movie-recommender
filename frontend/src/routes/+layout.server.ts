@@ -5,7 +5,7 @@ import {
 	APPSYNC_AUTHENTICATION_TYPE,
 	USERPOOL_ID,
 	USERPOOL_CLIENTID,
-	COGNITO_DOMAIN
+	USERPOOL_DOMAIN
 } from '$env/static/private';
 import type { LayoutServerLoad } from './$types';
 import { Amplify } from 'aws-amplify';
@@ -26,7 +26,7 @@ const awsAuthConfig = {
 		identityPoolId: IDENTITYPOOL_ID,
 		mandatorySignIn: false,
 		oath: {
-			domain: COGNITO_DOMAIN,
+			domain: USERPOOL_DOMAIN,
 			scope: ['email', 'openid', 'profile'],
 			redirectSignIn: 'http://localhost:5173',
 			redirectSignOut: 'http://localhost:5173',
