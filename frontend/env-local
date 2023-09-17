@@ -1,0 +1,10 @@
+# COGNITO
+USERPOOL_ID='us-east-1_nD2rrRgZA'
+USERPOOL_CLIENTID='258i8u6tlt147ess3kjvjtf65t'
+IDENTITYPOOL_ID='us-east-1:2b48e69a-c1b4-4d3e-8b47-ba0902a076ee'
+USERPOOL_DOMAIN='https://mbti-movies-recommender.auth.us-east-1.amazoncognito.com'
+
+# APPSYNC
+APPSYNC_REGION='us-east-1'
+APPSYNC_GRAPHQL_URL='https://c2n67v2hhjhgjhiayavjliknpa.appsync-api.us-east-1.amazonaws.com/graphql'
+APPSYNC_AUTHENTICATION_TYPE='AWS_IAM'

@@ -10,3 +10,8 @@
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>
+<script>
+	if (global === undefined) {
+		var global = window;
+	}
+</script>
